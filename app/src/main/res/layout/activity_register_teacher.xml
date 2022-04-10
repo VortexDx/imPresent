@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterTeacher">
+
+    <ImageView
+        android:id="@+id/imageView_teacher"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_marginTop="60dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/teacher_icon" />
+
+    <TextView
+        android:id="@+id/name_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="60dp"
+        android:text="Name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_teacher" />
+
+    <TextView
+        android:id="@+id/teacher_id_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Teacher Id"
+        app:layout_constraintEnd_toEndOf="@+id/name_textView"
+        app:layout_constraintStart_toStartOf="@+id/name_textView"
+        app:layout_constraintTop_toBottomOf="@+id/name_textView" />
+
+    <TextView
+        android:id="@+id/subject_id_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Subject ID"
+        app:layout_constraintEnd_toEndOf="@+id/semester_textView"
+        app:layout_constraintStart_toStartOf="@+id/semester_textView"
+        app:layout_constraintTop_toBottomOf="@+id/semester_textView" />
+
+    <TextView
+        android:id="@+id/semester_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Semester"
+        app:layout_constraintEnd_toEndOf="@+id/teacher_id_textView"
+        app:layout_constraintStart_toStartOf="@+id/teacher_id_textView"
+        app:layout_constraintTop_toBottomOf="@+id/teacher_id_textView" />
+
+    <TextView
+        android:id="@+id/password_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Enter Password"
+        app:layout_constraintEnd_toEndOf="@+id/subject_id_textView"
+        app:layout_constraintStart_toStartOf="@+id/subject_id_textView"
+        app:layout_constraintTop_toBottomOf="@+id/subject_id_textView" />
+
+    <TextView
+        android:id="@+id/confirm_password_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Confirm Password"
+        app:layout_constraintEnd_toEndOf="@+id/password_textView"
+        app:layout_constraintStart_toStartOf="@+id/password_textView"
+        app:layout_constraintTop_toBottomOf="@+id/password_textView" />
+
+    <EditText
+        android:id="@+id/editText_register_teacher_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:ems="10"
+        android:hint="Full Name"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/name_textView"
+        app:layout_constraintStart_toEndOf="@+id/name_textView"
+        app:layout_constraintTop_toTopOf="@+id/name_textView"
+        app:layout_constraintVertical_bias="0.653" />
+
+    <EditText
+        android:id="@+id/editText_register_teacher_teacherId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Id"
+        android:inputType="textPersonName|textCapCharacters"
+        app:layout_constraintBottom_toBottomOf="@+id/teacher_id_textView"
+        app:layout_constraintEnd_toEndOf="@+id/editText_register_teacher_name"
+        app:layout_constraintStart_toStartOf="@+id/editText_register_teacher_name"
+        app:layout_constraintTop_toTopOf="@+id/teacher_id_textView" />
+
+    <EditText
+        android:id="@+id/editText_register_teacher_subject_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Subject Id without spaces"
+        android:inputType="textPersonName|textCapCharacters"
+        android:marqueeRepeatLimit="marquee_forever"
+        app:layout_constraintBottom_toBottomOf="@+id/subject_id_textView"
+        app:layout_constraintEnd_toEndOf="@+id/spinner_semester_dropdown"
+        app:layout_constraintStart_toStartOf="@+id/spinner_semester_dropdown"
+        app:layout_constraintTop_toTopOf="@+id/subject_id_textView" />
+
+    <EditText
+        android:id="@+id/editText_register_teacher_enterPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="@+id/password_textView"
+        app:layout_constraintEnd_toEndOf="@+id/editText_register_teacher_subject_id"
+        app:layout_constraintStart_toStartOf="@+id/editText_register_teacher_subject_id"
+        app:layout_constraintTop_toTopOf="@+id/password_textView" />
+
+    <EditText
+        android:id="@+id/editText_teacher_register_confirm_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Re-Enter Password"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="@+id/confirm_password_textView"
+        app:layout_constraintEnd_toEndOf="@+id/editText_register_teacher_enterPassword"
+        app:layout_constraintStart_toStartOf="@+id/editText_register_teacher_enterPassword"
+        app:layout_constraintTop_toTopOf="@+id/confirm_password_textView" />
+
+    <Spinner
+        android:id="@+id/spinner_semester_dropdown"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        app:layout_constraintBottom_toBottomOf="@+id/semester_textView"
+        app:layout_constraintEnd_toEndOf="@+id/editText_register_teacher_teacherId"
+        app:layout_constraintStart_toStartOf="@+id/editText_register_teacher_teacherId"
+        app:layout_constraintTop_toTopOf="@+id/semester_textView"
+        app:layout_constraintVertical_bias="0.333" />
+
+    <Button
+        android:id="@+id/button_register_teacher_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Register"
+        app:layout_constraintEnd_toEndOf="@+id/imageView_teacher"
+        app:layout_constraintStart_toStartOf="@+id/imageView_teacher"
+        app:layout_constraintTop_toBottomOf="@+id/editText_teacher_register_confirm_password" />
+</androidx.constraintlayout.widget.ConstraintLayout>

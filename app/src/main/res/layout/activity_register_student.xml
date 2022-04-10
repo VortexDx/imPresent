@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterStudent">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_marginTop="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/student_icon" />
+
+    <TextView
+        android:id="@+id/textView_register_student_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="60dp"
+        android:text="Name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/textView_register_student_enroll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Enrollment No."
+        app:layout_constraintEnd_toEndOf="@+id/textView_register_student_name"
+        app:layout_constraintStart_toStartOf="@+id/textView_register_student_name"
+        app:layout_constraintTop_toBottomOf="@+id/textView_register_student_name" />
+
+    <TextView
+        android:id="@+id/textView_register_student_semester"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Semester"
+        app:layout_constraintEnd_toEndOf="@+id/textView_register_student_enroll"
+        app:layout_constraintStart_toStartOf="@+id/textView_register_student_enroll"
+        app:layout_constraintTop_toBottomOf="@+id/textView_register_student_enroll" />
+
+    <TextView
+        android:id="@+id/textView_register_student_enter_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Enter Password"
+        app:layout_constraintEnd_toEndOf="@+id/textView_register_student_semester"
+        app:layout_constraintStart_toStartOf="@+id/textView_register_student_semester"
+        app:layout_constraintTop_toBottomOf="@+id/textView_register_student_semester" />
+
+    <TextView
+        android:id="@+id/textView_register_student_confirm_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Confirm Password"
+        app:layout_constraintEnd_toEndOf="@+id/textView_register_student_enter_password"
+        app:layout_constraintStart_toStartOf="@+id/textView_register_student_enter_password"
+        app:layout_constraintTop_toBottomOf="@+id/textView_register_student_enter_password" />
+
+    <EditText
+        android:id="@+id/editText_register_student_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:ems="10"
+        android:hint="Full Name"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/textView_register_student_name"
+        app:layout_constraintStart_toEndOf="@+id/textView_register_student_name"
+        app:layout_constraintTop_toTopOf="@+id/textView_register_student_name" />
+
+    <EditText
+        android:id="@+id/editText_register_student_enroll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="20NNBXXXNNN"
+        android:inputType="textPersonName|textCapCharacters"
+        app:layout_constraintBottom_toBottomOf="@+id/textView_register_student_enroll"
+        app:layout_constraintEnd_toEndOf="@+id/editText_register_student_name"
+        app:layout_constraintStart_toStartOf="@+id/editText_register_student_name"
+        app:layout_constraintTop_toTopOf="@+id/textView_register_student_enroll" />
+
+    <Spinner
+        android:id="@+id/spinner_register_student_semester"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView_register_student_semester"
+        app:layout_constraintEnd_toEndOf="@+id/editText_register_student_enroll"
+        app:layout_constraintStart_toStartOf="@+id/editText_register_student_enroll"
+        app:layout_constraintTop_toTopOf="@+id/textView_register_student_semester" />
+
+    <EditText
+        android:id="@+id/editText_register_student_enter_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="@+id/textView_register_student_enter_password"
+        app:layout_constraintEnd_toEndOf="@+id/spinner_register_student_semester"
+        app:layout_constraintStart_toStartOf="@+id/spinner_register_student_semester"
+        app:layout_constraintTop_toTopOf="@+id/textView_register_student_enter_password" />
+
+    <EditText
+        android:id="@+id/editText_register_student_confirm_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Re-Enter Password"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="@+id/textView_register_student_confirm_password"
+        app:layout_constraintEnd_toEndOf="@+id/editText_register_student_enter_password"
+        app:layout_constraintStart_toStartOf="@+id/editText_register_student_enter_password"
+        app:layout_constraintTop_toTopOf="@+id/textView_register_student_confirm_password" />
+
+    <ImageButton
+        android:id="@+id/imageButton_register_student_finprint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/textView_student_register_finprint"
+        app:layout_constraintEnd_toEndOf="@+id/editText_register_student_confirm_password"
+        app:layout_constraintStart_toStartOf="@+id/editText_register_student_confirm_password"
+        app:layout_constraintTop_toTopOf="@+id/textView_student_register_finprint"
+        app:srcCompat="?android:attr/fingerprintAuthDrawable" />
+
+    <TextView
+        android:id="@+id/textView_student_register_finprint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Enter fingerprint"
+        app:layout_constraintEnd_toEndOf="@+id/textView_register_student_confirm_password"
+        app:layout_constraintStart_toStartOf="@+id/textView_register_student_confirm_password"
+        app:layout_constraintTop_toBottomOf="@+id/textView_register_student_confirm_password" />
+
+    <ImageView
+        android:id="@+id/imageView_register_student_finprint_status"
+        android:layout_width="27dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButton_register_student_finprint"
+        app:layout_constraintStart_toEndOf="@+id/imageButton_register_student_finprint"
+        app:layout_constraintTop_toTopOf="@+id/imageButton_register_student_finprint"
+        app:srcCompat="@android:drawable/ic_delete" />
+
+    <Button
+        android:id="@+id/button_register_student_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Register"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton_register_student_finprint" />
+</androidx.constraintlayout.widget.ConstraintLayout>
