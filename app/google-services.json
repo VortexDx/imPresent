@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "972469048836",
+    "project_id": "impresentfirebase",
+    "storage_bucket": "impresentfirebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:972469048836:android:8dccc10d9a53cc4b164751",
+        "android_client_info": {
+          "package_name": "com.final_project.impresent"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "972469048836-9to55u1jk18ohuc61895kkoo0o8a1v74.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1IkFTSPJMZTFIrSDeHgQFcEbECJX5bxs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "972469048836-9to55u1jk18ohuc61895kkoo0o8a1v74.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

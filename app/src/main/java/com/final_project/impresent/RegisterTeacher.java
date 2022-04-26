@@ -1,5 +1,6 @@
 package com.final_project.impresent;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -11,6 +12,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 public class RegisterTeacher extends AppCompatActivity {
 
@@ -35,17 +39,17 @@ public class RegisterTeacher extends AppCompatActivity {
         select_semester = findViewById(R.id.spinner_semester_dropdown);
         register = findViewById(R.id.button_register_teacher_register);
 
-        String[] semesters = new String[]{"I","II","III","IV","V","VI","VII","VIII"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_dropdown_item,semesters);
+        Integer[] semesters = new Integer[]{1,2,3,4,5,6,7,8};
+        ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(this,android.R.layout.simple_spinner_dropdown_item,semesters);
         select_semester.setAdapter(adapter);
 
-        final String[] sem = {"I"};
+        final Integer[] sem = {1};
 
         select_semester.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 sem[0] =semesters[i];
-                Log.d("spinner_registerTeacher",sem[0]);
+                Log.d("spinner_registerTeacher",""+sem[0]);
             }
 
             @Override
@@ -72,6 +76,8 @@ public class RegisterTeacher extends AppCompatActivity {
                 else{
                     Log.d("RegisterTeacher_Values","Name= "+name+" id= "+id+" sem= "+sem[0]+" subId= "+subId+" pass= "+pass+" confPass= "+confirmPass);
                     // store in DB or Cloud
+                    Teacher teacher = new Teacher(name,id,subId,pass,sem[0]);
+
                 }
 
             }
