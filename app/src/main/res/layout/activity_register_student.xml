@@ -8,9 +8,9 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        android:layout_marginTop="60dp"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="50dp"
         android:text="Name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
@@ -53,9 +53,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:text="Enter Password"
-        app:layout_constraintEnd_toEndOf="@+id/textView_register_student_semester"
-        app:layout_constraintStart_toStartOf="@+id/textView_register_student_semester"
-        app:layout_constraintTop_toBottomOf="@+id/textView_register_student_semester" />
+        app:layout_constraintEnd_toEndOf="@+id/textView_register_student_email"
+        app:layout_constraintStart_toStartOf="@+id/textView_register_student_email"
+        app:layout_constraintTop_toBottomOf="@+id/textView_register_student_email" />
 
     <TextView
         android:id="@+id/textView_register_student_confirm_password"
@@ -105,7 +105,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Password"
+        android:hint="Atleast 6 Characters"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="@+id/textView_register_student_enter_password"
         app:layout_constraintEnd_toEndOf="@+id/spinner_register_student_semester"
@@ -163,4 +163,26 @@
         app:layout_constraintEnd_toEndOf="@+id/imageView"
         app:layout_constraintStart_toStartOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/imageButton_register_student_finprint" />
+
+    <TextView
+        android:id="@+id/textView_register_student_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Email"
+        app:layout_constraintEnd_toEndOf="@+id/textView_register_student_semester"
+        app:layout_constraintStart_toStartOf="@+id/textView_register_student_semester"
+        app:layout_constraintTop_toBottomOf="@+id/textView_register_student_semester" />
+
+    <EditText
+        android:id="@+id/editText_register_student_TextEmailAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        app:layout_constraintBottom_toBottomOf="@+id/textView_register_student_email"
+        app:layout_constraintEnd_toEndOf="@+id/spinner_register_student_semester"
+        app:layout_constraintStart_toStartOf="@+id/spinner_register_student_semester"
+        app:layout_constraintTop_toTopOf="@+id/textView_register_student_email" />
 </androidx.constraintlayout.widget.ConstraintLayout>

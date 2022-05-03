@@ -1,17 +1,18 @@
 package com.final_project.impresent;
 
 public class Student {
-    private String name, id, password;
+    private String name, id, password, email;
     private int sem;
 
     public Student() {
     }
 
-    public Student(String name, String id, String password, int sem) {
+    public Student(String name, String id, String password, int sem, String email) {
         this.name = name;
         this.id = id;
         this.password = password;
         this.sem = sem;
+        this.email = email;
     }
 
     public String getName() {
@@ -44,5 +45,13 @@ public class Student {
 
     public void setSem(int sem) {
         this.sem = sem;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

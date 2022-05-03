@@ -22,8 +22,12 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,6 +35,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Locale;
 import java.util.concurrent.Executor;
 
 
@@ -43,6 +48,7 @@ public class RegisterStudent extends AppCompatActivity {
     EditText editText_enroll;
     EditText editText_pass;
     EditText editText_confirm_pass;
+    EditText editText_email;
     Spinner semester_dropdown;
     ImageButton finprint_enter;
     ImageView finprint_status;
@@ -58,6 +64,7 @@ public class RegisterStudent extends AppCompatActivity {
         editText_enroll = findViewById(R.id.editText_register_student_enroll);
         editText_pass = findViewById(R.id.editText_register_student_enter_password);
         editText_confirm_pass = findViewById(R.id.editText_register_student_confirm_password);
+        editText_email = findViewById(R.id.editText_register_student_TextEmailAddress);
         semester_dropdown = findViewById(R.id.spinner_register_student_semester);
         finprint_enter = findViewById(R.id.imageButton_register_student_finprint);
         finprint_status = findViewById(R.id.imageView_register_student_finprint_status);
@@ -145,18 +152,19 @@ public class RegisterStudent extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String name, enroll, pass, confpass;
+                String name, enroll, pass, confpass, email;
                 name = editText_name.getText().toString();
                 enroll = editText_enroll.getText().toString();
                 pass = editText_pass.getText().toString();
                 confpass = editText_confirm_pass.getText().toString();
+                email = editText_email.getText().toString().toLowerCase();
 
-                if (name.equals("") || enroll.equals("") || pass.equals("") || confpass.equals("") || !pass.equals(confpass) || enroll.contains(" ")) {
+                if (name.equals("") || enroll.equals("") || pass.length()<6 || email.equals("") || !pass.equals(confpass) || enroll.contains(" ")) {
                     Toast.makeText(RegisterStudent.this, "Invalid Entries", Toast.LENGTH_SHORT).show();
                     Log.d("Student_Register", "Name= " + name + " Enroll= " + enroll + " Sem= " + sem[0] + " Pass= " + pass + " ConfPass= " + confpass);
                 } else {
-                    Log.d("Student_Register", "Name= " + name + " Enroll= " + enroll + " Sem= " + sem[0] + " Pass= " + pass + " ConfPass= " + confpass);
-                    Student student = new Student(name, enroll, pass, sem[0]);
+                    Log.d("Student_Register", "Name= " + name + " Enroll= " + enroll + " Sem= " + sem[0] + " Pass= " + pass + " ConfPass= " + confpass+" email= "+email);
+                    Student student = new Student(name, enroll, pass, sem[0], email);
                     // check id if already present and add data
                     RegisterStudent.checkEnroll(student,enroll,getApplicationContext());
                 }
@@ -179,20 +187,38 @@ public class RegisterStudent extends AppCompatActivity {
                 }
                 else{
                     Log.d("addStudent","inside");
-                    StudentDAO dao = new StudentDAO();
-                    dao.add(student).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    // Register with email and password
+                    FirebaseAuth auth;
+                    auth = FirebaseAuth.getInstance();
+                    auth.createUserWithEmailAndPassword(student.getEmail(), student.getPassword()).addOnCompleteListener(RegisterStudent.activity, new OnCompleteListener<AuthResult>() {
                         @Override
-                        public void onSuccess(Void unused) {
-                            Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show();
-                            context.startActivity(new Intent(context, MainActivity.class));
-                            activity.finish();
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(context, "Fail", Toast.LENGTH_SHORT).show();
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(task.isSuccessful()){
+                                Log.d("Create User","Success");
+                                StudentDAO dao = new StudentDAO();
+                                dao.add(student).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show();
+                                        Log.d("Add Student","Success");
+                                        RegisterStudent.activity.startActivity(new Intent(context, MainActivity.class));
+                                        activity.finish();
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(context, "Fail", Toast.LENGTH_SHORT).show();
+                                        Log.d("Add Student","Failed");
+                                    }
+                                });
+                            }
+                            else{
+                                Log.d("Create User","Failed "+task.getException());
+                            }
                         }
                     });
+                    //
+
                 }
 
             }
