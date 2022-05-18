@@ -4,10 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserStudent">
+    tools:context=".UserTeacher">
+
+    <ImageView
+        android:id="@+id/imageView_user_teacher"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/teacher_icon" />
 
     <TextView
-        android:id="@+id/textView_userStudent_name"
+        android:id="@+id/textView_user_teacher_welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Welcome"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_user_teacher" />
+
+    <TextView
+        android:id="@+id/textView_user_teacher_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -17,10 +39,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_user_student_welcome" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_user_teacher_welcome" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/imageButton2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -30,68 +52,47 @@
         app:srcCompat="@drawable/ic_baseline_settings_24" />
 
     <ImageView
-        android:id="@+id/imageView_user_student_student"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:layout_marginTop="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/student_icon" />
-
-    <TextView
-        android:id="@+id/textView_user_student_welcome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="Welcome"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView_user_student_student" />
-
-    <ImageView
-        android:id="@+id/imageView_user_student_markPresent"
+        android:id="@+id/imageView_user_teacher_startAttendance"
         android:layout_width="140dp"
         android:layout_height="140dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="50dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_userStudent_name"
+        app:layout_constraintTop_toBottomOf="@+id/textView_user_teacher_name"
         app:srcCompat="@drawable/student_raise_hand" />
 
     <ImageView
-        android:id="@+id/imageView_user_student_checkAttendance"
+        android:id="@+id/imageView_user_teacher_getAttendance"
         android:layout_width="140dp"
         android:layout_height="140dp"
         android:layout_marginEnd="40dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView_user_student_markPresent"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView_user_teacher_startAttendance"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView_user_student_markPresent"
+        app:layout_constraintTop_toTopOf="@+id/imageView_user_teacher_startAttendance"
         app:srcCompat="@drawable/list" />
 
     <TextView
-        android:id="@+id/textView_user_student_markPresent"
+        android:id="@+id/textView_user_teacher_startAttendance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Mark Present"
-        app:layout_constraintEnd_toEndOf="@+id/imageView_user_student_markPresent"
-        app:layout_constraintStart_toStartOf="@+id/imageView_user_student_markPresent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView_user_student_markPresent" />
+        android:text="Start Attendance"
+        app:layout_constraintEnd_toEndOf="@+id/imageView_user_teacher_startAttendance"
+        app:layout_constraintStart_toStartOf="@+id/imageView_user_teacher_startAttendance"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_user_teacher_startAttendance" />
 
     <TextView
-        android:id="@+id/textView_user_student_checkAttendance"
+        android:id="@+id/textView_user_teacher_getAttendance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Check Attendance"
-        app:layout_constraintEnd_toEndOf="@+id/imageView_user_student_checkAttendance"
-        app:layout_constraintStart_toStartOf="@+id/imageView_user_student_checkAttendance"
-        app:layout_constraintTop_toBottomOf="@+id/imageView_user_student_checkAttendance" />
+        android:text="Get Attendance"
+        app:layout_constraintEnd_toEndOf="@+id/imageView_user_teacher_getAttendance"
+        app:layout_constraintStart_toStartOf="@+id/imageView_user_teacher_getAttendance"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_user_teacher_getAttendance" />
 
     <Button
-        android:id="@+id/button_user_student_logout"
+        android:id="@+id/button_user_teacher_logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"

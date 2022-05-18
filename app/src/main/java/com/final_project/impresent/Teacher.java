@@ -1,18 +1,17 @@
 package com.final_project.impresent;
 
 public class Teacher {
-    private String name,id,subId,pass;
-    private int sem;
+    private String name,id,pass,email;
+
 
     public Teacher() {
     }
 
-    public Teacher(String name, String id, String subId, String pass, int sem) {
+    public Teacher(String name, String id, String email , String pass) {
         this.name = name;
         this.id = id;
-        this.subId = subId;
         this.pass = pass;
-        this.sem = sem;
+       this.email = email;
     }
 
     public String getName() {
@@ -31,13 +30,6 @@ public class Teacher {
         this.id = id;
     }
 
-    public String getSubId() {
-        return subId;
-    }
-
-    public void setSubId(String subId) {
-        this.subId = subId;
-    }
 
     public String getPass() {
         return pass;
@@ -47,11 +39,11 @@ public class Teacher {
         this.pass = pass;
     }
 
-    public int getSem() {
-        return sem;
+    public String getEmail() {
+        return email;
     }
 
-    public void setSem(int sem) {
-        this.sem = sem;
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
