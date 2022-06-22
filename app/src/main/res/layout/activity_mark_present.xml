@@ -6,4 +6,113 @@
     android:layout_height="match_parent"
     tools:context=".MarkPresent">
 
+    <TextView
+        android:id="@+id/textView_markPresent_class"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="60dp"
+        android:text="Class"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_makrPresent" />
+
+    <Spinner
+        android:id="@+id/spinner_markPresent_class"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="60dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView_markPresent_class"
+        app:layout_constraintStart_toEndOf="@+id/textView_markPresent_class"
+        app:layout_constraintTop_toTopOf="@+id/textView_markPresent_class" />
+
+    <Spinner
+        android:id="@+id/spinner_markPresent_subject"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView_markPresent_subject"
+        app:layout_constraintEnd_toEndOf="@+id/spinner_markPresent_class"
+        app:layout_constraintStart_toStartOf="@+id/spinner_markPresent_class"
+        app:layout_constraintTop_toTopOf="@+id/textView_markPresent_subject" />
+
+    <TextView
+        android:id="@+id/textView_markPresent_subject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="Subject"
+        app:layout_constraintEnd_toEndOf="@+id/textView_markPresent_class"
+        app:layout_constraintStart_toStartOf="@+id/textView_markPresent_class"
+        app:layout_constraintTop_toBottomOf="@+id/textView_markPresent_class" />
+
+    <ImageButton
+        android:id="@+id/imageButton_markPresent_biometric"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/textView_markPresent_biometric"
+        app:layout_constraintEnd_toEndOf="@+id/spinner_markPresent_subject"
+        app:layout_constraintStart_toStartOf="@+id/spinner_markPresent_subject"
+        app:layout_constraintTop_toTopOf="@+id/textView_markPresent_biometric"
+        app:srcCompat="@drawable/fingerprint_dialog_fp_icon" />
+
+    <TextView
+        android:id="@+id/textView_markPresent_biometric"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="Verify Biometric"
+        app:layout_constraintEnd_toEndOf="@+id/textView_markPresent_subject"
+        app:layout_constraintStart_toStartOf="@+id/textView_markPresent_subject"
+        app:layout_constraintTop_toBottomOf="@+id/textView_markPresent_subject" />
+
+    <ImageView
+        android:id="@+id/imageView_markPresent_biometricStatus"
+        android:layout_width="27dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButton_markPresent_biometric"
+        app:layout_constraintStart_toEndOf="@+id/imageButton_markPresent_biometric"
+        app:layout_constraintTop_toTopOf="@+id/imageButton_markPresent_biometric"
+        app:srcCompat="@android:drawable/ic_delete" />
+
+    <Button
+        android:id="@+id/button_markPresent_markPresent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp"
+        android:text="Mark Present"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView_makrPresent"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/student_raise_hand" />
+
+    <TextView
+        android:id="@+id/textView_markPresent_yourCoordinates"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="Your Coordinates"
+        app:layout_constraintEnd_toEndOf="@+id/textView_markPresent_biometric"
+        app:layout_constraintStart_toStartOf="@+id/textView_markPresent_biometric"
+        app:layout_constraintTop_toBottomOf="@+id/textView_markPresent_biometric" />
+
+    <TextView
+        android:id="@+id/textView_markPresent_coordinates"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0.0 , 0.0"
+        app:layout_constraintBottom_toBottomOf="@+id/textView_markPresent_yourCoordinates"
+        app:layout_constraintEnd_toEndOf="@+id/imageButton_markPresent_biometric"
+        app:layout_constraintStart_toStartOf="@+id/imageButton_markPresent_biometric"
+        app:layout_constraintTop_toTopOf="@+id/textView_markPresent_yourCoordinates" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,6 +11,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -164,15 +165,16 @@ public class RegisterStudent extends AppCompatActivity {
                     Log.d("Student_Register", "Name= " + name + " Enroll= " + enroll + " Sem= " + sem[0] + " Pass= " + pass + " ConfPass= " + confpass);
                 } else {
                     Log.d("Student_Register", "Name= " + name + " Enroll= " + enroll + " Sem= " + sem[0] + " Pass= " + pass + " ConfPass= " + confpass+" email= "+email);
-                    Student student = new Student(name, enroll, pass, sem[0], email);
+                    String deviceID = Settings.Secure.getString(RegisterStudent.this.getContentResolver(), Settings.Secure.ANDROID_ID);
+                    Student student = new Student(name, enroll, sem[0], email, deviceID);
                     // check id if already present and add data
-                    RegisterStudent.checkEnroll(student,enroll,getApplicationContext());
+                    RegisterStudent.checkEnroll(student,enroll,pass,getApplicationContext());
                 }
             }
         });
     }
 
-    public static void checkEnroll(Student student, String enroll, Context context) {
+    public static void checkEnroll(Student student, String enroll,String pass, Context context) {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
         Query query = reference.child("Student").orderByChild("id").equalTo(enroll);
         final boolean[] present = {false};
@@ -190,7 +192,7 @@ public class RegisterStudent extends AppCompatActivity {
                     // Register with email and password
                     FirebaseAuth auth;
                     auth = FirebaseAuth.getInstance();
-                    auth.createUserWithEmailAndPassword(student.getEmail(), student.getPassword()).addOnCompleteListener(RegisterStudent.activity, new OnCompleteListener<AuthResult>() {
+                    auth.createUserWithEmailAndPassword(student.getEmail(), pass).addOnCompleteListener(RegisterStudent.activity, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){

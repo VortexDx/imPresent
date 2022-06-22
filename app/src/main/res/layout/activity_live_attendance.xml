@@ -6,4 +6,36 @@
     android:layout_height="match_parent"
     tools:context=".LiveAttendance">
 
+    <TextView
+        android:id="@+id/textView_liveAttendance"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView_live_attendance_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="Location"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/textView_liveAttendance"
+        app:layout_constraintStart_toStartOf="@+id/textView_liveAttendance" />
+
+    <TextView
+        android:id="@+id/textView_liveAttendance_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_liveAttendance" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

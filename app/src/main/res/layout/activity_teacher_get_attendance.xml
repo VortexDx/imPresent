@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TeacherGetAttendance">
+
+    <TextView
+        android:id="@+id/textView_TeacherGetAttendance_semester"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="50dp"
+        android:text="Semester"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    <Spinner
+        android:id="@+id/spinner_TeacherGetAttendance_sem"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="60dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView_TeacherGetAttendance_semester"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView_TeacherGetAttendance_semester" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Class"
+        app:layout_constraintEnd_toEndOf="@+id/textView_TeacherGetAttendance_semester"
+        app:layout_constraintStart_toStartOf="@+id/textView_TeacherGetAttendance_semester"
+        app:layout_constraintTop_toBottomOf="@+id/textView_TeacherGetAttendance_semester" />
+
+    <Spinner
+        android:id="@+id/spinner_TeacherGetAttendance_class"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="@+id/spinner_TeacherGetAttendance_sem"
+        app:layout_constraintStart_toStartOf="@+id/spinner_TeacherGetAttendance_sem"
+        app:layout_constraintTop_toTopOf="@+id/textView2" />
+
+    <Spinner
+        android:id="@+id/spinner_TeacherGetAttendance_sub"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView_TeacherGetAttendance_sub"
+        app:layout_constraintEnd_toEndOf="@+id/spinner_TeacherGetAttendance_class"
+        app:layout_constraintStart_toStartOf="@+id/spinner_TeacherGetAttendance_class"
+        app:layout_constraintTop_toTopOf="@+id/textView_TeacherGetAttendance_sub" />
+
+    <TextView
+        android:id="@+id/textView_TeacherGetAttendance_sub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Subject"
+        app:layout_constraintEnd_toEndOf="@+id/textView2"
+        app:layout_constraintStart_toStartOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/textView_TeacherGetAttendance_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Date"
+        app:layout_constraintEnd_toEndOf="@+id/textView_TeacherGetAttendance_sub"
+        app:layout_constraintStart_toStartOf="@+id/textView_TeacherGetAttendance_sub"
+        app:layout_constraintTop_toBottomOf="@+id/button_TeacherGetAttendance_getFullData" />
+
+    <Spinner
+        android:id="@+id/spinner_TeacherGetAttendance_date"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView_TeacherGetAttendance_date"
+        app:layout_constraintEnd_toEndOf="@+id/spinner_TeacherGetAttendance_sub"
+        app:layout_constraintStart_toStartOf="@+id/spinner_TeacherGetAttendance_sub"
+        app:layout_constraintTop_toTopOf="@+id/textView_TeacherGetAttendance_date" />
+
+    <Spinner
+        android:id="@+id/spinner_TeacherGetAttendance_time"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView_TeacherGetAttendance_time"
+        app:layout_constraintEnd_toEndOf="@+id/spinner_TeacherGetAttendance_date"
+        app:layout_constraintStart_toStartOf="@+id/spinner_TeacherGetAttendance_date"
+        app:layout_constraintTop_toTopOf="@+id/textView_TeacherGetAttendance_time" />
+
+    <TextView
+        android:id="@+id/textView_TeacherGetAttendance_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Time"
+        app:layout_constraintEnd_toEndOf="@+id/textView_TeacherGetAttendance_date"
+        app:layout_constraintStart_toStartOf="@+id/textView_TeacherGetAttendance_date"
+        app:layout_constraintTop_toBottomOf="@+id/textView_TeacherGetAttendance_date" />
+
+    <Button
+        android:id="@+id/button_TeacherGetAttendance_getParticular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Get Particular"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_TeacherGetAttendance_time" />
+
+    <Button
+        android:id="@+id/button_TeacherGetAttendance_getFullData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Get Full Data"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_TeacherGetAttendance_sub" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/data" />
+</androidx.constraintlayout.widget.ConstraintLayout>

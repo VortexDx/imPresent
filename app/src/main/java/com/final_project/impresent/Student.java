@@ -1,18 +1,21 @@
 package com.final_project.impresent;
 
-public class Student {
-    private String name, id, password, email;
+import java.io.Serializable;
+
+public class Student implements Serializable {
+    private String name, id, email, branch, androidId;
     private int sem;
 
     public Student() {
     }
 
-    public Student(String name, String id, String password, int sem, String email) {
+    public Student(String name, String id, int sem, String email, String androidId) {
         this.name = name;
         this.id = id;
-        this.password = password;
         this.sem = sem;
         this.email = email;
+        this.branch = id.substring(5,8);
+        this.androidId = androidId;
     }
 
     public String getName() {
@@ -31,14 +34,6 @@ public class Student {
         this.id = id;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public int getSem() {
         return sem;
     }
@@ -53,5 +48,21 @@ public class Student {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getBranch() {
+        return branch;
+    }
+
+    public void setBranch(String branch){
+        this.branch = branch;
+    }
+
+    public String getAndroidId() {
+        return androidId;
+    }
+
+    public void setAndroidId(String androidId) {
+        this.androidId = androidId;
     }
 }

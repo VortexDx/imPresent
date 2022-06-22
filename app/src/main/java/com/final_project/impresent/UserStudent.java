@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -33,6 +34,7 @@ public class UserStudent extends AppCompatActivity {
 
         String name,email,pass,id;
         int sem;
+        final Student[] student = new Student[1];
 
         Intent intent = getIntent();
         email = intent.getStringExtra("email");
@@ -46,9 +48,9 @@ public class UserStudent extends AppCompatActivity {
                     //Iterable<DataSnapshot> studentList = snapshot.getChildren();
                     for(DataSnapshot child: snapshot.getChildren()){
                         Log.d("snapshot",child.getValue().toString());
-                        Student student = child.getValue(Student.class);
+                        student[0] = child.getValue(Student.class);
                         TextView tv = findViewById(R.id.textView_userStudent_name);
-                        tv.setText(student.getName());
+                        tv.setText(student[0].getName());
 
                     }
                 }
@@ -75,7 +77,21 @@ public class UserStudent extends AppCompatActivity {
         markPresent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent markPresentIntent = new Intent(UserStudent.this, MarkPresent.class);
+                markPresentIntent.putExtra("name", student[0].getName());
+                markPresentIntent.putExtra("enroll",student[0].getId());
+                markPresentIntent.putExtra("email",student[0].getEmail());
+                markPresentIntent.putExtra("sem",""+student[0].getSem());
+                System.out.println(student[0].getSem());
+                startActivity(markPresentIntent);
+            }
+        });
+        checkAttendance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentGetAttendance = new Intent(UserStudent.this,StudentGetAttendance.class );
+                intentGetAttendance.putExtra("student",student[0]);
+                startActivity(intentGetAttendance);
             }
         });
     }

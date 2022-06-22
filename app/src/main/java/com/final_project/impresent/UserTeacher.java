@@ -73,5 +73,12 @@ public class UserTeacher extends AppCompatActivity {
                 startActivity(startAttendanceIntent);
             }
         });
+        getAttendance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent getAttendanceIntent = new Intent(UserTeacher.this, TeacherGetAttendance.class);
+                startActivity(getAttendanceIntent);
+            }
+        });
     }
 }
