@@ -115,4 +115,14 @@
         app:layout_constraintEnd_toEndOf="@+id/imageButton_markPresent_biometric"
         app:layout_constraintStart_toStartOf="@+id/imageButton_markPresent_biometric"
         app:layout_constraintTop_toTopOf="@+id/textView_markPresent_yourCoordinates" />
+
+    <ImageView
+        android:id="@+id/imageView_markPresent_presentDone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/button_markPresent_markPresent"
+        app:layout_constraintStart_toEndOf="@+id/button_markPresent_markPresent"
+        app:layout_constraintTop_toTopOf="@+id/button_markPresent_markPresent"
+        app:srcCompat="@android:drawable/ic_delete" />
 </androidx.constraintlayout.widget.ConstraintLayout>

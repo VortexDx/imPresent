@@ -111,7 +111,8 @@ public class TeacherGetAttendance extends AppCompatActivity {
 
     private void getAttendanceByDate() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Attendance").child(globalSem).child(globalClass).child(globalSub).child(globalDate).child(globalTime);
-
+        DatabaseReference imgReference = FirebaseDatabase.getInstance().getReference("Images").child(globalSem).child(globalClass).child(globalSub).child(globalDate).child(globalTime);
+        
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -122,10 +123,35 @@ public class TeacherGetAttendance extends AppCompatActivity {
                         }
                     }
                     Log.d("List = ", ""+attendanceList);
-                    Intent intent = new Intent(TeacherGetAttendance.this,ShowTeacherAttendanceDateWise.class);
-                    intent.putExtra("attendance",attendanceList);
-                    intent.putExtra("class",globalClass);
-                    startActivity(intent);
+                    imgReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if(snapshot.exists()){
+                                HashMap<String,String> enrollImgMap = new HashMap<>();
+                                //ArrayList<String> imgAttendanceList = new ArrayList<>();
+                                for(DataSnapshot imgdsp : snapshot.getChildren()){
+                                    for(DataSnapshot imgdsp2 : imgdsp.getChildren()){
+                                        //imgAttendanceList.add(imgdsp2.getValue().toString());
+                                        enrollImgMap.put(imgdsp2.getKey(), imgdsp2.getValue().toString());
+                                    }
+                                }
+                                Intent intent = new Intent(TeacherGetAttendance.this,ShowTeacherAttendanceDateWise.class);
+                                intent.putExtra("attendance",attendanceList);
+                                intent.putExtra("imgMap",enrollImgMap);
+                                intent.putExtra("class",globalClass);
+                                startActivity(intent);
+                            }
+                            else{
+                                Toast.makeText(TeacherGetAttendance.this, "No Image data: ERROR", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                    
                 }
                 else {
                     Toast.makeText(TeacherGetAttendance.this, "No Attendance in Db", Toast.LENGTH_SHORT).show();

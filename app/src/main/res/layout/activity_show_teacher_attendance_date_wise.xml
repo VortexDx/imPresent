@@ -28,6 +28,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Click for student image"
+        app:layout_constraintEnd_toEndOf="@+id/textView_showTeacherAttendanceDateWise_PresentStudents"
+        app:layout_constraintStart_toStartOf="@+id/textView_showTeacherAttendanceDateWise_PresentStudents"
         app:layout_constraintTop_toBottomOf="@+id/textView_showTeacherAttendanceDateWise_PresentStudents" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

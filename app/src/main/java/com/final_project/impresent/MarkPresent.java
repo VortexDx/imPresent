@@ -1,6 +1,7 @@
 package com.final_project.impresent;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.biometric.BiometricManager;
 import androidx.biometric.BiometricPrompt;
@@ -12,13 +13,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
+import android.provider.MediaStore;
 import android.provider.Settings;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -50,6 +55,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
+import java.io.ByteArrayOutputStream;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.text.ParseException;
@@ -62,18 +68,22 @@ import java.util.Locale;
 import java.util.concurrent.Executor;
 
 public class MarkPresent extends AppCompatActivity {
+    public static final int CAMERA_REQ_CODE = 102;
     Spinner spinnerClass, spinnerSubject;
     ImageButton verifyBiometric;
     ImageView biometricStatus;
+    ImageView presentDone;
     Button markPresent;
     TextView textViewCoordinates;
 
     LocationRequest locationRequest;
 
-    String name,sem,enroll,email;
+    String name="",sem="",enroll="",email="",globalDate="",globalTime="",globalLocation="";
     String className="",subjectName="",subjectId="";
     double latitude=0.0,longitude=0.0;
     double range = 30.0;
+    String globalDeviceID;
+    DatabaseReference globalLocationReference;
 
     final boolean[] pushed = {false};
 
@@ -91,6 +101,7 @@ public class MarkPresent extends AppCompatActivity {
         biometricStatus = findViewById(R.id.imageView_markPresent_biometricStatus);
         markPresent = findViewById(R.id.button_markPresent_markPresent);
         textViewCoordinates = findViewById(R.id.textView_markPresent_coordinates);
+        presentDone = findViewById(R.id.imageView_markPresent_presentDone);
 
 
         getLocation();
@@ -138,6 +149,7 @@ public class MarkPresent extends AppCompatActivity {
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
         SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm a");
         String dateToStr = format.format(today);
+        globalDate = dateToStr;
         String timeToStr = timeFormat.format(today);
         System.out.println(dateToStr+" "+timeToStr);
         
@@ -148,6 +160,7 @@ public class MarkPresent extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
+                    boolean timeOver=true;
                     for(DataSnapshot dsp : snapshot.getChildren()){
                         // getting times here
                         // continue from here       //////////////////////////////////////////////////////////////////////////////////
@@ -162,6 +175,8 @@ public class MarkPresent extends AppCompatActivity {
                             // compare with deviceTime(current device time)
                             if(DeviceTime.compareTo(DBTime)<0){
                                 System.out.println("Valid times "+DeviceTime+" < "+DBTime);
+                                timeOver = false;
+                                globalTime = dsp.getKey();
                                 timeReference[0] = reference.child(dsp.getKey());
                                 if(matchLocation(timeReference[0])){
                                     System.out.println("if matchLocation true");
@@ -172,6 +187,9 @@ public class MarkPresent extends AppCompatActivity {
                             e.printStackTrace();
                         }
                         System.out.println("Time from DB "+DBTime+" : "+DeviceTime);
+                    }
+                    if(timeOver){
+                        Toast.makeText(MarkPresent.this, "Time is over now", Toast.LENGTH_SHORT).show();
                     }
                 }
                 else{
@@ -228,7 +246,7 @@ public class MarkPresent extends AppCompatActivity {
                         if(distance[0]<=range){                          /////////////////////////////////////////////////////////    range updates
                             DatabaseReference locationReference = timeReference.child(DBLocation[0]);
                             Log.d("test","12300");
-
+                            globalLocation = DBLocation[0];
                             String deviceID = Settings.Secure.getString(markPresent.getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
                             Log.d("Device ID",deviceID);
                             checkDeviceIDMatch(deviceID, locationReference);
@@ -264,7 +282,10 @@ public class MarkPresent extends AppCompatActivity {
                         Student student = dsp.getValue(Student.class);
                         if(student.getId().equals(enroll)){
                             if(student.getAndroidId().equals(deviceID)){
-                                checkDeviceIDPresent(deviceID,locationReference);
+                                globalDeviceID = deviceID;
+                                globalLocationReference = locationReference;
+                                captureUploadImage();
+
                             }
                             else{
                                 Toast.makeText(MarkPresent.this, "Android id different contact admin to update", Toast.LENGTH_SHORT).show();
@@ -286,7 +307,7 @@ public class MarkPresent extends AppCompatActivity {
         });
     }
 
-    private boolean checkDeviceIDPresent(String id, DatabaseReference locationReference) {
+    private boolean checkDeviceIDPresent(String id, DatabaseReference locationReference, String encodedImg) {
         final boolean[] present = {false};
         locationReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -302,6 +323,7 @@ public class MarkPresent extends AppCompatActivity {
                     }
                     if(!present[0]){
                         Log.d("Device id","Absent "+id);
+                        uploadImage(encodedImg);
                         locationReference.child(id).setValue(enroll);
                         pushed[0] = true;
                         Toast.makeText(MarkPresent.this, "You are Present", Toast.LENGTH_SHORT).show();
@@ -311,6 +333,7 @@ public class MarkPresent extends AppCompatActivity {
                 }
                 else{
                     Log.d("Device id","Absent "+id);
+                    uploadImage(encodedImg);
                     locationReference.child(id).setValue(enroll);
                     pushed[0] = true;
                     Toast.makeText(MarkPresent.this, "You are Present", Toast.LENGTH_SHORT).show();
@@ -326,6 +349,74 @@ public class MarkPresent extends AppCompatActivity {
 
         return present[0];
     }
+
+    private void uploadImage(String encodedImg) {
+        Log.d("img to string",""+encodedImg);
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Images").child(sem).child(className).child(subjectId).child(globalDate).child(globalTime).child(globalLocation);
+        reference.child(enroll).setValue(encodedImg);
+        presentDone.setImageResource(R.drawable.ic_baseline_check_24);
+        markPresent.setEnabled(false);
+    }
+
+    private void captureUploadImage() {
+        askCameraPermission();
+    }
+
+    private void askCameraPermission() {
+        if(ContextCompat.checkSelfPermission(this,Manifest.permission.CAMERA)!=PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CAMERA},101);
+        }
+        else {
+            openCamera();
+        }
+    }
+
+    private void openCamera() {
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(cameraIntent,CAMERA_REQ_CODE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == CAMERA_REQ_CODE){
+            Bitmap image = null;
+            Log.d("OpenCamera","Camera data is here");
+            if(resultCode == RESULT_OK) {
+                image = (Bitmap) data.getExtras().get("data");
+                if (image != null) {
+                    // encode image to base64 string
+                    ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                    image.compress(Bitmap.CompressFormat.PNG,100,byteArrayOutputStream);
+                    byte[] byteArray = byteArrayOutputStream.toByteArray();
+                    String encodedImage = Base64.encodeToString(byteArray, Base64.DEFAULT);
+                    //
+                    checkDeviceIDPresent(globalDeviceID, globalLocationReference, encodedImage);
+                } else {
+                    Toast.makeText(this, "No image captured", Toast.LENGTH_SHORT).show();
+                }
+            }
+            else{
+                Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
+            }
+
+
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (101 == requestCode) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // permission granted
+                openCamera();
+            } else {
+                Toast.makeText(this, "Camera permission required", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
 
     private double calculateDistance(double lat1, double long1, double lat2, double long2) {
         int radiusEarth = 6371000;
